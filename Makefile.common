@@ -143,6 +143,7 @@ $(call end-emulator-library)
 #  1) For Windows: amd64-mingw32msvc-gcc doesn't work, see http://b/issue?id=5949152.
 #  2) Standalone has --try-64
 ifneq ($(filter linux darwin,$(HOST_OS)),)
+ ifneq ($(HOST_BITS),32)
   ifneq ($(BUILD_STANDALONE_EMULATOR),true)
     $(call start-emulator-library, emulator64-common)
     LOCAL_CFLAGS += $(common_LOCAL_CFLAGS) -m64
@@ -150,6 +151,7 @@ ifneq ($(filter linux darwin,$(HOST_OS)),)
     $(call gen-hw-config-defs)
     $(call end-emulator-library)
   endif # BUILD_STANDALONE_EMULATOR == nil
+ endif # HOST_BITS != 32
 endif # HOST_OS == linux || darwin
 
 ##############################################################################
@@ -288,6 +290,7 @@ $(call end-emulator-library)
 
 ## another for 64-bit, see note in emulator64-common
 ifneq ($(filter linux darwin,$(HOST_OS)),)
+ ifneq ($(HOST_BITS),32)
   ifneq ($(BUILD_STANDALONE_EMULATOR),true)
     $(call start-emulator-library, emulator64-libui)
     LOCAL_CFLAGS += $(common_LOCAL_CFLAGS) -m64
@@ -295,6 +298,7 @@ ifneq ($(filter linux darwin,$(HOST_OS)),)
     $(call gen-hw-config-defs)
     $(call end-emulator-library)
   endif # BUILD_STANDALONE_EMULATOR == nil
+ endif # HOST_BITS != 32
 endif # HOST_OS == linux || darwin
 
 
@@ -600,6 +604,7 @@ $(call end-emulator-library)
 
 ## another for 64-bit, see note in emulator64-common
 ifneq ($(filter linux darwin,$(HOST_OS)),)
+ ifneq ($(HOST_BITS),32)
   ifneq ($(BUILD_STANDALONE_EMULATOR),true)
     $(call start-emulator-library, emulator64-libqemu)
     # gdbstub-xml.c contains C-compilable arrays corresponding to the content
@@ -619,6 +624,7 @@ ifneq ($(filter linux darwin,$(HOST_OS)),)
     $(call gen-hw-config-defs)
     $(call end-emulator-library)
   endif # BUILD_STANDALONE_EMULATOR == nil
+ endif # HOST_BITS != 32
 endif # HOST_OS == linux || darwin
 
 
@@ -684,12 +690,14 @@ $(call end-emulator-library)
 
 ## another for 64-bit, see note in emulator64-common
 ifneq ($(filter linux darwin,$(HOST_OS)),)
+ ifneq ($(HOST_BITS),32)
   ifneq ($(BUILD_STANDALONE_EMULATOR),true)
     $(call start-emulator-library, emulator64-libjpeg)
     LOCAL_CFLAGS += $(common_LOCAL_CFLAGS) -m64
     LOCAL_SRC_FILES += $(common_LOCAL_SRC_FILES)
     $(call end-emulator-library)
   endif # BUILD_STANDALONE_EMULATOR == nil
+ endif # HOST_BITS != 32
 endif # HOST_OS == linux
 
 
@@ -734,6 +742,7 @@ $(call end-emulator-library)
 
 ## another for 64-bit, see note in emulator64-common
 ifneq ($(filter linux darwin,$(HOST_OS)),)
+ ifneq ($(HOST_BITS),32)
   ifneq ($(BUILD_STANDALONE_EMULATOR),true)
     $(call start-emulator-library, emulator64-libelff)
     LOCAL_CPP_EXTENSION := .cc
@@ -741,6 +750,7 @@ ifneq ($(filter linux darwin,$(HOST_OS)),)
     LOCAL_SRC_FILES += $(common_LOCAL_SRC_FILES)
     $(call end-emulator-library)
   endif # BUILD_STANDALONE_EMULATOR == nil
+ endif # HOST_BITS != 32
 endif # HOST_OS == linux || darwin
 
 
